@@ -1,0 +1,1326 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="shortcut icon" href="https://i.postimg.cc/KYYSsPSR/Screenshot-2026-05-30-14-59-42-removebg-preview.png">
+<link rel="icon" type="image/png" href="https://i.postimg.cc/KYYSsPSR/Screenshot-2026-05-30-14-59-42-removebg-preview.png">
+<link rel="apple-touch-icon" href="https://i.postimg.cc/KYYSsPSR/Screenshot-2026-05-30-14-59-42-removebg-preview.png">
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Snipershot!</title>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  background:#060608;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.bg{
+  position:fixed;
+  inset:0;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,0,0,.14), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,0,0,.10), transparent 45%),
+    url('https://i.postimg.cc/PfvN6szG/red.jpg') center/cover no-repeat;
+
+  filter:brightness(.3);
+  transform:none;
+}
+
+#bootScreen{
+  position:fixed;
+  inset:0;
+  background:#050507;
+  z-index:999999;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  gap:19px;
+}
+
+.bootLogo{
+  font-size:78px;
+  font-weight:900;
+  letter-spacing:-4px;
+
+  text-shadow:
+    0 0 10px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(17, 9, 9, 0.88);
+}
+
+.bootText{
+  opacity:.67;
+  font-size:14px;
+  font-weight:600;
+}
+
+.bootBarWrap{
+  width:min(500px,80vw);
+  height:18px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.bootBar{
+  width:0%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #36a125b4,
+      #ff0000a2
+    );
+
+  transition:width .2s linear;
+
+  box-shadow:
+    0 0 24px rgba(255,0,0,.32);
+}
+
+#particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:1;
+}
+
+.particle{
+  position:absolute;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.35);
+
+  animation:float linear infinite;
+}
+
+@keyframes float{
+
+  from{
+    transform:translateY(100vh);
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  to{
+    transform:translateY(-120vh);
+    opacity:0;
+  }
+
+}
+
+.panel{
+  position:relative;
+  z-index:2;
+
+  width:min(1000px,92vw);
+
+  padding:38px;
+
+  border-radius:28px;
+
+  background:rgba(18,18,24,.66);
+
+  backdrop-filter:blur(13px);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 0 40px rgba(0,0,0,.28);
+}
+
+.logo{
+  font-size:86px;
+  font-weight:900;
+  letter-spacing:-3.2px;
+  line-height:.9;
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,.18),
+    0 0 24px rgba(255,70,70,.25),
+    0 0 50px rgba(255,0,0,.25);
+}
+
+.logo span{
+  color:#ff3939;
+}
+
+.sub{
+  margin-top:10px;
+  opacity:.78;
+  font-weight:600;
+}
+
+.proxyStats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+
+  margin-top:18px;
+}
+
+.proxyBox{
+  padding:18px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.proxyBox span{
+  display:block;
+  margin-bottom:6px;
+
+  font-size:12px;
+  opacity:.6;
+}
+
+.proxyBox strong{
+  font-size:26px;
+}
+
+.slider{
+  margin-top:20px;
+  overflow:hidden;
+
+  padding:14px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.track{
+  display:flex;
+  gap:14px;
+
+  width:max-content;
+
+  will-change:transform;
+}
+
+.slide{
+  padding:12px 18px;
+
+  border-radius:14px;
+
+  white-space:nowrap;
+
+  font-weight:700;
+
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.search{
+  margin-top:18px;
+
+  display:flex;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.search input{
+  flex:1;
+
+  background:none;
+  border:none;
+  outline:none;
+
+  color:white;
+  font-size:15px;
+}
+
+.search input::placeholder{
+  color:rgba(255,255,255,.45);
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+
+.card{
+  padding:22px;
+
+  border-radius:20px;
+
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+
+  cursor:pointer;
+
+  font-weight:700;
+
+  transition:
+    transform .18s ease,
+    border-color .18s ease,
+    background .18s ease;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  background:rgba(255,255,255,.06);
+  border-color:rgba(255,60,60,.42);
+}
+
+.gameTitle{
+  position:relative;
+  z-index:2;
+}
+
+.gamePreview{
+
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:2px;
+
+  opacity:0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.72),
+      rgba(0,0,0,.18)
+    );
+
+  transition:
+    opacity .22s ease,
+    transform .22s ease;
+
+  transform:translateY(10px);
+
+  pointer-events:none;
+}
+
+.card:hover .gamePreview{
+
+  opacity:1;
+
+  transform:translateY(0);
+}
+
+
+#fx{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  pointer-events:none;
+}
+
+#sniper{
+  position:fixed;
+
+  width:420px;
+
+  left:120px;
+  top:120px;
+
+  z-index:1000;
+
+  cursor:grab;
+
+  user-select:none;
+  image-rendering:pixelated;
+
+  transform-origin:center;
+
+  filter:
+    drop-shadow(0 0 12px rgba(210, 33, 33, 0.55))
+    drop-shadow(0 0 28px rgba(40, 36, 36, 0.49));
+}
+#quotePanel{
+  position:fixed;
+  left:20px;
+  bottom:20px;
+
+  width:320px;
+
+  padding:18px 20px;
+
+  border-radius:18px;
+
+  background:rgba(18,18,24,.62);
+  backdrop-filter:blur(22px);
+
+  border:1px solid rgba(255,255,255,.10);
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,.4);
+
+  z-index:9999; /* <- forces overlay above everything */
+
+  pointer-events:none; /* prevents blocking clicks */
+}
+
+/* small accent bar */
+#quotePanel::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  height:3px;
+  width:100%;
+
+  background:linear-gradient(
+    90deg,
+    #ff3b3b,
+    #ff7a18,
+    #ff3b3b
+  );
+
+  opacity:.8;
+}
+
+/* quote icon */
+#quotePanel::after{
+  content:"“”";
+  position:absolute;
+  right:14px;
+  bottom:8px;
+
+  font-size:28px;
+  opacity:.12;
+  letter-spacing:2px;
+}
+
+#quoteText{
+  font-size:16px;
+  font-weight:700;
+  line-height:1.4;
+
+  color:white;
+
+  opacity:1;
+
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
+
+  text-shadow:0 0 10px rgba(255,255,255,.12);
+}
+
+</style>
+
+<style>
+#scramjetView{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  border:0;
+  z-index:10000;
+  background:white;
+  display:none;
+}
+</style>
+<script src="/bootstrap-init.js"></script>
+<script>
+let snipershotFrame = null;
+let snipershotReady = false;
+
+function normalizeScramjetTarget(value){
+  let text = String(value || "").trim();
+  if(!text) return "";
+  if(/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(text)) return text;
+  if(text.includes(".") && !text.includes(" ")) return "https://" + text;
+  return "https://search.brave.com/search?q=" + encodeURIComponent(text);
+}
+
+async function startScramjet(){
+  try{
+    const controller = await initBootstrap();
+    await controller.wait();
+    const iframe = document.createElement("iframe");
+    iframe.id = "scramjetView";
+    iframe.allow = "autoplay; fullscreen; pointer-lock; gamepad; clipboard-read; clipboard-write";
+    iframe.setAttribute("allowfullscreen", "");
+    document.body.appendChild(iframe);
+    snipershotFrame = controller.createFrame(iframe);
+    snipershotReady = true;
+    console.log("[scramjet] connected");
+  }catch(err){
+    console.error("[scramjet] failed", err);
+  }
+}
+
+function loadScramjetTarget(value){
+  const target = normalizeScramjetTarget(value);
+  if(!target) return;
+  if(!snipershotReady || !snipershotFrame){
+    setTimeout(() => loadScramjetTarget(target), 250);
+    return;
+  }
+  const iframe = document.getElementById("scramjetView");
+  iframe.style.display = "block";
+  snipershotFrame.go(target);
+}
+
+startScramjet();
+window.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form.search");
+  const input = document.getElementById("input");
+  if(form){
+    form.addEventListener("submit", go);
+  }
+  if(input){
+    input.addEventListener("keydown", event => {
+      if(event.key === "Enter"){
+        go(event);
+      }
+    });
+  }
+});
+</script>
+</head>
+<script>
+const quotes = [
+  "Spiderbee if tuff, im tuffer.",
+  "Coding type shi.",
+  "Loading uhhh idfk ph or sum.",
+  "Hamilton is tuff.",
+  "Hi uhhhhh im tired.",
+  "Five night at epsteins is tuff as hell boi",
+  "listen here u will play tiki tiki funk and mi pan zu zu zu max vol and change server image to tom peral aura framming or u disrepected my family-Deltahub"
+];
+
+let quoteIndex = 0;
+
+window.addEventListener("load", () => {
+  const quoteText = document.getElementById("quoteText");
+
+  if (!quoteText) {
+    console.warn("quoteText not found");
+    return;
+  }
+
+  // start with random quote
+  quoteIndex = Math.floor(Math.random() * quotes.length);
+  quoteText.textContent = quotes[quoteIndex];
+
+  function nextQuote() {
+    quoteText.style.opacity = "0";
+    quoteText.style.transform = "translateY(10px)";
+
+    setTimeout(() => {
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      quoteText.textContent = quotes[quoteIndex];
+
+      quoteText.style.opacity = "1";
+      quoteText.style.transform = "translateY(0)";
+    }, 250);
+  }
+
+  setInterval(nextQuote, 5000);
+});
+</script>
+
+<body>
+
+<div id="bootScreen">
+
+  <div class="bootLogo">
+  SNIPERSHOT :D
+  </div>
+
+  <div class="bootText" id="bootText">
+    Coding type shi
+  </div>
+
+  <div class="bootBarWrap">
+    <div class="bootBar" id="bootBar"></div>
+  </div>
+
+</div>
+
+<div id="particles"></div>
+
+<div class="bg"></div>
+<div id="quotePanel">
+
+  <div id="quoteText">
+    "welcome to snipershot or sum idfk"
+  </div>
+
+</div>
+<div class="panel">
+
+  <div class="logo">
+    sniper<span>shot</span>
+  </div>
+
+  <div class="sub">
+    Tuff upd 
+  </div>
+
+  <div class="proxyStats">
+
+    <div class="proxyBox">
+      <span>Nodes</span>
+<strong id="nodeCount">LOCAL</strong>
+    </div>
+
+    <div class="proxyBox">
+      <span>Latency</span>
+      <strong id="latency">43ms</strong>
+    </div>
+
+    <div class="proxyBox">
+      <span>Status</span>
+      <strong id="proxyState">ONLINE</strong>
+    </div>
+
+  </div>
+
+  <div class="slider">
+
+    <div class="track" id="track">
+
+    <div class="slide">PROXY</div>
+      <div class="slide">W GAMES</div>
+      <div class="slide">SNIPERSHOT</div>
+      <div class="slide">UI</div>
+
+      <div class="slide">PROXY</div>
+      <div class="slide">W GAMES </div>
+      <div class="slide">SNIPERSHOT</div>
+      <div class="slide">UI</div>
+
+    </div>
+
+  </div>
+
+  <form
+    class="search"
+    onsubmit="go(event)"
+  >
+
+    <input
+      id="input"
+      placeholder="Search or URL...good boi"
+    >
+
+  </form>
+
+<div class="cards">
+
+<div class="card" onclick="location.href='/games/lumin'">
+  Lumin Games
+</div>
+
+<div class="card" onclick="location.href='/games/gnmath'">
+  GN-Math Games
+</div>
+
+<div class="card" onclick="location.href='/games/nikehub'">
+  NikeHub Games
+</div>
+
+  <div class="card" onclick="window.open('https://discord.gg/6ct6ERhEN','_blank')">
+    Discord PLEASE JOIN :(
+  </div>
+
+  <div class="card" onclick="window.open('https://www.tiktok.com/@pufferrrrrrrrrrrrrrrrrr','_blank')">
+    Snipershot TikTok
+  </div>
+
+</div>
+
+<canvas id="fx"></canvas>
+
+<img
+  id="sniper"
+  src="https://i.postimg.cc/3wyZYkkK/images-Photoroom.png"
+  draggable="false"
+>
+
+<script>
+function cardShoot(event, url) {
+  location.href = url;
+}
+
+
+function go(e){
+
+  e.preventDefault();
+
+  let value =
+    document
+      .getElementById("input")
+      .value
+      .trim();
+  if(!value){
+    return;
+  }
+
+  if(value.includes(".")){
+
+    if(
+      !value.startsWith("http://") &&
+      !value.startsWith("https://")
+    ){
+      value = "https://" + value;
+    }
+
+    loadScramjetTarget(value);
+
+    return;
+  }
+
+  loadScramjetTarget(value);
+}
+
+const track =
+  document.getElementById("track");
+
+let trackPos = 0;
+let trackVel = 0.65;
+let wobble = 0;
+
+function animateTrack(){
+
+  wobble += 0.02;
+
+  trackPos -= trackVel + Math.sin(wobble) * 0.04;
+
+  const width = track.scrollWidth / 2;
+
+  if (Math.abs(trackPos) > width) {
+    trackPos = 0;
+  }
+
+  const value = "translate3d(" + trackPos + "px,0,0)";
+
+  track.style.transform = value;
+
+  requestAnimationFrame(animateTrack);
+}
+
+animateTrack();
+
+
+const bootBar =
+  document.getElementById("bootBar");
+
+const bootText =
+  document.getElementById("bootText");
+
+const bootScreen =
+  document.getElementById("bootScreen");
+
+const bootMessages = [
+  "Gooning...",
+  "Tying the knot...",
+  "kicking the chair...",
+  "*printer noises*...",
+  "thinking...",
+  "loading games...",
+  "almost done..."
+];
+
+window.addEventListener("load", () => {
+
+  let progress = 0;
+  let currentMessage = 0;
+
+  const bootAnim = setInterval(() => {
+
+    progress +=
+      Math.random() * 18;
+
+    if(progress > 100){
+      progress = 100;
+    }
+
+    bootBar.style.width =
+      progress + "%";
+
+    if(
+      currentMessage <
+      bootMessages.length - 1
+    ){
+
+      if(
+        progress >
+        (currentMessage + 1) * 14
+      ){
+
+        currentMessage++;
+
+        bootText.textContent =
+          bootMessages[currentMessage];
+      }
+    }
+
+    if(progress >= 100){
+
+      clearInterval(bootAnim);
+
+      setTimeout(() => {
+
+        bootScreen.style.transition =
+          "opacity .45s ease";
+
+        bootScreen.style.opacity = "0";
+
+        setTimeout(() => {
+          bootScreen.remove();
+        },450);
+
+      },250);
+    }
+
+  },120);
+
+  const particleWrap =
+    document.getElementById("particles");
+
+  for(let i = 0; i < 80; i++){
+
+    const particle =
+      document.createElement("div");
+
+    particle.className = "particle";
+
+    particle.style.left =
+      Math.random() * 100 + "%";
+
+    particle.style.top =
+      Math.random() * 100 + "%";
+
+    particle.style.animationDuration =
+      4 + Math.random() * 12 + "s";
+
+    particle.style.animationDelay =
+      Math.random() * 5 + "s";
+
+    particle.style.opacity =
+      Math.random();
+
+    particleWrap.appendChild(particle);
+  }
+
+  const latency =
+    document.getElementById("latency");
+
+  const nodeCount =
+    document.getElementById("nodeCount");
+
+  const proxyState =
+    document.getElementById("proxyState");
+
+async function updateStats(){
+
+  const start = performance.now();
+
+  try{
+
+    await fetch("/", {
+      cache: "no-store"
+    });
+
+    const ping =
+      Math.round(
+        performance.now() - start
+      );
+
+    latency.textContent =
+      ping + "ms";
+
+    proxyState.textContent =
+      "ONLINE";
+
+  }catch{
+
+    proxyState.textContent =
+      "OFFLINE";
+  }
+
+}
+
+updateStats();
+
+setInterval(updateStats,5000);
+  console.log("[snipershot] boot ok");
+  console.log("[proxy] connected");
+  console.log("[games] loaded");
+
+});
+
+const sniper =
+  document.getElementById("sniper");
+
+const canvas =
+  document.getElementById("fx");
+
+const ctx =
+  canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+addEventListener("resize", () => {
+
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+
+});
+
+let x = 120;
+let y = 120;
+
+let vx = 0;
+let vy = 0;
+
+let dragging = false;
+
+let facing = 1;
+let targetFacing = 1;
+
+let currentFlip = 1;
+
+let currentAngle = 0;
+let targetAngle = 0;
+
+let bullets = [];
+
+let ammo = 100;
+
+let reloading = false;
+let reloadVisual = 0;
+
+let grabOffsetX = 0;
+let grabOffsetY = 0;
+
+sniper.onmousedown = e => {
+
+  dragging = true;
+
+  const rect =
+    sniper.getBoundingClientRect();
+
+  grabOffsetX =
+    e.clientX - rect.left;
+
+  grabOffsetY =
+    e.clientY - rect.top;
+
+  vx = 0;
+  vy = 0;
+
+  sniper.style.cursor =
+    "grabbing";
+};
+
+addEventListener("mouseup", () => {
+
+  dragging = false;
+
+  sniper.style.cursor =
+    "grab";
+
+});
+
+let targetX = x;
+let targetY = y;
+
+let mouseVX = 0;
+let mouseVY = 0;
+
+let lastMouseX = 0;
+let lastMouseY = 0;
+
+addEventListener("mousemove", e => {
+
+  mouseVX =
+    e.clientX - lastMouseX;
+
+  mouseVY =
+    e.clientY - lastMouseY;
+
+  lastMouseX = e.clientX;
+  lastMouseY = e.clientY;
+
+  if(!dragging){
+    return;
+  }
+
+  targetX =
+    e.clientX - grabOffsetX;
+
+  targetY =
+    e.clientY - grabOffsetY;
+
+  const grabPercent =
+    grabOffsetX /
+    sniper.offsetWidth;
+
+  const leverage =
+    grabPercent - 0.5;
+
+  targetAngle =
+    -(leverage * 85);
+
+  vx += mouseVX * 0.08;
+  vy += mouseVY * 0.08;
+
+});
+
+const keys = {};
+
+addEventListener("keydown", e => {
+
+  keys[e.key.toLowerCase()] = true;
+
+  if(
+    e.key.toLowerCase() === "r"
+  ){
+    reload();
+  }
+
+  if(
+    e.key.toLowerCase() === "e"
+  ){
+    shoot();
+  }
+
+});
+
+addEventListener("keyup", e => {
+
+  keys[e.key.toLowerCase()] = false;
+
+});
+
+function keyboardLoop(){
+
+  if(keys.a){
+
+    targetFacing = -1;
+
+    vx -= 0.22;
+  }
+
+  if(keys.d){
+
+    targetFacing = 1;
+
+    vx += 0.22;
+  }
+
+  if(keys.w){
+
+    targetAngle -= 1.4;
+  }
+
+  if(keys.s){
+
+    targetAngle += 1.4;
+  }
+
+  requestAnimationFrame(
+    keyboardLoop
+  );
+}
+
+keyboardLoop();
+
+function reload(){
+
+  if(reloading){
+    return;
+  }
+
+  reloading = true;
+
+  let spin = 0;
+
+  const reloadAnim = setInterval(() => {
+
+    spin += 10;
+
+    reloadVisual = spin;
+
+  },16);
+
+  setTimeout(() => {
+
+    clearInterval(reloadAnim);
+
+    reloadVisual = 0;
+    ammo = 10;
+
+    reloading = false;
+
+  },900);
+}
+
+function shoot(){
+
+  if(reloading){
+    return;
+  }
+
+  if(ammo <= 0){
+    reload();
+    return;
+  }
+
+  ammo--;
+
+  const radians =
+    currentAngle *
+    Math.PI / 180;
+
+  const speed = 12;
+
+  const muzzleX =
+    x +
+    (facing === 1 ? 315 : 95) +
+    Math.cos(radians) *
+    120 *
+    facing;
+
+  const muzzleY =
+    y +
+    90 +
+    Math.sin(radians) * 120;
+
+  bullets.push({
+
+    x:muzzleX,
+    y:muzzleY,
+
+    vx:
+      Math.cos(radians) *
+      speed *
+      facing,
+
+    vy:
+      Math.sin(radians) *
+      speed,
+
+    life:0
+
+  });
+}
+
+function update(){
+
+  if(dragging){
+
+    x +=
+      (targetX - x) * 0.22;
+
+    y +=
+      (targetY - y) * 0.22;
+
+  }else{
+
+    vy += 0.42;
+
+    x += vx;
+    y += vy;
+
+    vx *= 0.985;
+    vy *= 0.985;
+  }
+
+  const leverage =
+    (grabOffsetX /
+    sniper.offsetWidth) - 0.5;
+
+  if(dragging){
+    targetAngle -=
+      leverage * 1.4;
+  }
+
+ const floor =
+  innerHeight - sniper.offsetHeight;
+
+  if(y > floor){
+
+    y = floor;
+
+    vy *= -0.22;
+
+    vx *= 0.96;
+
+    if(Math.abs(vy) < 0.25){
+      vy = 0;
+    }
+  }
+
+if(x < 0){
+
+  x = 0;
+  vx *= -0.35;
+
+}
+
+if(
+  x >
+  innerWidth - sniper.offsetWidth
+){
+
+  x =
+    innerWidth - sniper.offsetWidth;
+
+  vx *= -0.35;
+
+}
+
+  currentFlip +=
+    (targetFacing - currentFlip) *
+    0.12;
+
+  currentAngle +=
+    (targetAngle - currentAngle) *
+    0.12;
+
+  sniper.style.left =
+    x + "px";
+
+  sniper.style.top =
+    y + "px";
+
+sniper.style.transform =
+  "scaleX(" + currentFlip + ") rotate(" + (currentAngle + reloadVisual) + "deg)";
+
+  requestAnimationFrame(update);
+}
+
+update();
+
+function bulletDraw(x, y, angle){
+
+  ctx.save();
+
+  ctx.translate(x, y);
+
+  ctx.rotate(angle);
+
+  ctx.fillStyle = "#d4b06a";
+
+  ctx.fillRect(-6, -1, 12, 3);
+
+  ctx.fillStyle = "#f7e4a8";
+
+  ctx.fillRect(4, -1, 4, 3);
+
+  ctx.restore();
+}
+
+function render(){
+
+  ctx.clearRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  for(
+    let i = bullets.length - 1;
+    i >= 0;
+    i--
+  ){
+
+    const bullet =
+      bullets[i];
+
+    bullet.life++;
+
+    bullet.x += bullet.vx;
+    bullet.y += bullet.vy;
+
+    bulletDraw(
+      bullet.x,
+      bullet.y,
+      Math.atan2(
+        bullet.vy,
+        bullet.vx
+      )
+    );
+
+    if(
+      bullet.life > 220 ||
+      bullet.x < -200 ||
+      bullet.x > innerWidth + 200 ||
+      bullet.y < -200 ||
+      bullet.y > innerHeight + 200
+    ){
+      bullets.splice(i,1);
+    }
+  }
+
+  requestAnimationFrame(render);
+}
+
+render();
+
+</script>
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,25 @@
+﻿{
+    "name":  "Snipershot(work)",
+    "version":  "1.0.0",
+    "description":  "",
+    "main":  "index.js",
+    "scripts":  {
+                    "start":  "node server.mjs"
+                },
+    "keywords":  [
+
+                 ],
+    "author":  "",
+    "license":  "ISC",
+    "devEngines":  {
+                       "packageManager":  {
+                                              "name":  "pnpm",
+                                              "version":  "^11.7.0",
+                                              "onFail":  "download"
+                                          }
+                   },
+    "type":  "module",
+    "dependencies":  {
+                         "@mercuryworkshop/proxy-bootstrap":  "^0.0.5"
+                     }
+}
